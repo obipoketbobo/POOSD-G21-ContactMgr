@@ -4,9 +4,8 @@
 	$inData = getRequestInfo();
 	
 	$id = 0;
-    $userName = "";
-	$firstName = "";
-	$lastName = "";
+    $email = $inData["email"];
+    $password = $inData["password"];
 
 	$conn = new mysqli("localhost", "cmapi", "b4ckend!", "ContactManager"); 	
 	if( $conn->connect_error )
@@ -15,8 +14,8 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
+		$stmt = $conn->prepare("SELECT Email, Password FROM Users WHERE Email=? AND Password =?");
+		$stmt->bind_param("ss", $inData["email"], $inData["password"]);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
@@ -38,22 +37,21 @@
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-	function sendResultInfoAsJson( $obj )
+	 function returnWithError( $err )
 	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-	
-	function returnWithError( $err )
-	{
-		$retValue = '{"userName":' .$userName'""id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
-	function returnWithInfo($userName, $firstName, $lastName, $id )
+
+    function returnWithInfo( $firstName, $lastName, $id )
 	{
-		$retValue = '{"userName":' .$userName'"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
+
+    function sendResultInfoAsJson($obj)
+    {
+        header('Content-type: application/json');
+        echo $obj;
+    }
 ?>
