@@ -30,7 +30,7 @@ function doLogin()
         return;
     }
 
-	let tmp = {login:login,password:password};
+	let tmp = {email:login,password:password};
 //	var tmp = {login:login,password:hash};
 	let jsonPayload = JSON.stringify( tmp );
 	
