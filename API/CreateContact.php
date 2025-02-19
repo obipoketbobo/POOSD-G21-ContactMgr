@@ -1,61 +1,61 @@
 <?php
-        $inData = getRequestInfo();
+	$inData = getRequestInfo();
 
         //important data for Contacts Table
-        //user creating contact
-        $ownerId = $inData["ownerId"];
-        //new contact's email
-        $email = $inData["email"];
-        //new contact's first name
-        $first = $inData["firstName"];
-        //new contact's last name
-        $last = $inData["lastName"]
+	//user creating contact
+    $first = isset($inData["firstName"]) ? trim($inData["firstName"]) : "";
+    $last = isset($inData["lastName"]) ? trim($inData["lastName"]) : "";
+    $email = isset($inData["email"]) ? trim($inData["email"]) : "";
+    $ownerId = isset($inData["ownerId"]) ? $inData["ownerId"] : null;
 
+    //check if required fields are present
+    if (empty($first) || empty($last) || empty($email) || empty($ownerId)) {
+        returnWithError("Missing required fields.");
+        exit;
+    }
 
-        $conn = new mysqli("localhost", "cmapi", "b4ckend!", "ContactManager");
-        if ($conn->connect_error)
-        {
-                returnWithError( $conn->connect_error );
-        }
-        else
-        {
+	$conn = new mysqli("localhost", "cmapi", "b4ckend!", "ContactManager");
+	if ($conn->connect_error)
+	{
+		returnWithError( $conn->connect_error );
+	}
+	else
+	{
                 //making new entry into contacts using these fields
-                $stmt = $conn->prepare("INSERT into Contacts (ContactOwnerID, Email, FirstName, LastName) VALUES(?,?,?,?)");
+	 $stmt = $conn->prepare("INSERT into Contacts (ContactOwnerID, Email, FirstName, LastName, DateCreated, DateUpdated) VALUES(?,?,?,?, NOW(), NOW())");
 
-                //maybe ssss ?
-                $stmt->bind_param("ssss", $ownerId, $email, $first, $last);
+		$stmt->bind_param("ssss", $ownerId, $email, $first, $last);
+		$stmt->execute();
+     
+		$id = $stmt->insert_id;
 
-                $stmt->execute();
+		$stmt->close();
+		$conn->close();
 
-                $id = $stmt->insert_id;
+		returnWithInfo($id, $first, $last, $email, $ownerId);
+	}
 
-                $stmt->close();
-                $conn->close();
+	function getRequestInfo()
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
 
-                returnWithInfo($id, $first, $last, $email, $ownerId);
-        }
+	function returnWithInfo( $id, $first, $last, $email, $ownerId )
+	{
+		$retValue = ["ownerId" => $ownerID, "id" => $id, "firstName" => $first, "lastName" => $last, "error" => ""];
+		sendResultInfoAsJson($retValue);
+	}
 
-        function getRequestInfo()
-        {
-                return json_decode(file_get_contents('php://input'), true);
-        }
-
-        function sendResultInfoAsJson( $obj )
-        {
-                header('Content-type: application/json');
-                echo $obj;
-        }
-
-        function returnWithInfo( $id, $firstName, $lastName, $email, $ownerId )
-        {
-                $retValue = '{"ID":"' . $id . '", "ownerID":"' . $ownerId . '","firstName":"' . $firstName . '","lastName":"' . $lastName . '","email":"' . $email . '","error":""}';
-                sendResultInfoAsJson( $retValue );
-        }
-
-        function returnWithError( $err )
-        {
-                $retValue = '{"error":"' . $err . '"}';
-                sendResultInfoAsJson( $retValue );
-        }
+	function returnWithError( $err )
+	{
+		$retValue = ["error" => $err];
+		sendResultInfoAsJson( $retValue );
+	}
+ 
+  function sendResultInfoAsJson($obj)
+    {
+        header('Content-type: application/json');
+        echo json_encode($obj);
+    }
 
 ?>
