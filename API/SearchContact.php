@@ -38,7 +38,7 @@
 				"firstName" => $row["FirstName"],
 				"lastName" => $row["LastName"],
 				"email" => $row["Email"],
-        "contactID" => $row["ID"]
+        		"contactID" => $row["ID"]
 			];
 			$searchCount++;
 		}
@@ -46,7 +46,7 @@
 		// If no records are found, return an error message
 		if( $searchCount == 0 )
 		{
-			returnWithError( "No Records Found" );
+			returnWithError( "No Contacts Found" );
 		}
 		else
 		{
