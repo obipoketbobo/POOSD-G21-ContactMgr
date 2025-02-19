@@ -41,7 +41,8 @@
             $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
             $stmt->execute();
 
-            $user_id = $stmt->insert_id; //save user's id for returning
+            //save user's id for returning
+            $user_id = $stmt->insert_id;
 
             //close connections
             $stmt->close();
@@ -56,21 +57,21 @@
 		return json_decode(file_get_contents('php://input'), true);
 	}
 
-    function returnWithError( $err )
+    function returnWithInfo( $firstName, $lastName, $id )
 	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+        $retValue = ["id" => $id, "firstName" => $firstName, "lastName" => $lastName, "error" => ""];
 		sendResultInfoAsJson( $retValue );
 	}
 
-    function returnWithInfo( $firstName, $lastName, $id )
+    function returnWithError( $err )
 	{
-		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+        $retValue = ["id" => 0, "error" => $err];
 		sendResultInfoAsJson( $retValue );
 	}
 
     function sendResultInfoAsJson($obj)
     {
         header('Content-type: application/json');
-        echo $obj;
+        echo json_encode($obj);
     }
 ?>
