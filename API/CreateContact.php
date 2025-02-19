@@ -42,7 +42,7 @@
 
 	function returnWithInfo( $id, $first, $last, $email, $ownerId )
 	{
-		$retValue = ["ownerId" => $ownerID, "id" => $id, "firstName" => $first, "lastName" => $last, "error" => ""];
+		$retValue = ["id" => $id, "ownerId" => $ownerId, "firstName" => $first, "lastName" => $last, "email" => $email, "error" => ""];
 		sendResultInfoAsJson($retValue);
 	}
 
