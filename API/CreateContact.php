@@ -1,8 +1,8 @@
 <?php
 	$inData = getRequestInfo();
 
-        //important data for Contacts Table
-	//user creating contact
+    	//important data for Contacts Table
+	//info of the contact to be created
     $first = isset($inData["firstName"]) ? trim($inData["firstName"]) : "";
     $last = isset($inData["lastName"]) ? trim($inData["lastName"]) : "";
     $email = isset($inData["email"]) ? trim($inData["email"]) : "";
@@ -21,8 +21,8 @@
 	}
 	else
 	{
-                //making new entry into contacts using these fields
-	 $stmt = $conn->prepare("INSERT into Contacts (ContactOwnerID, Email, FirstName, LastName, DateCreated, DateUpdated) VALUES(?,?,?,?, NOW(), NOW())");
+    	//making new entry into contacts using these fields
+		$stmt = $conn->prepare("INSERT into Contacts (ContactOwnerID, Email, FirstName, LastName, DateCreated, DateUpdated) VALUES(?,?,?,?, NOW(), NOW())");
 
 		$stmt->bind_param("ssss", $ownerId, $email, $first, $last);
 		$stmt->execute();
@@ -52,10 +52,9 @@
 		sendResultInfoAsJson( $retValue );
 	}
  
-  function sendResultInfoAsJson($obj)
+  	function sendResultInfoAsJson($obj)
     {
         header('Content-type: application/json');
         echo json_encode($obj);
     }
-
 ?>
