@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Manager</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <!-- Font Awesome CSS for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">Contact Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a id="logoutButton" class="nav-link" href="http://contactmanager.group21contactmanager.site/index.html">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card shadow">
+          <div class="card-header">
+            <div class="row align-items-center">
+              <div class="col-md-6"><h4 class="mb-0">Contacts</h4></div>
+              <div class="col-md-6 text-right">
+                <button class="btn btn-primary rounded-pill" id="refreshButton">
+                  <i class="fas fa-sync-alt"></i> Refresh Contacts
+                </button>
+                <button class="btn btn-success rounded-pill" data-toggle="modal" data-target="#contactModal" id="addContactBtn">
+                  <i class="fas fa-plus"></i> Add Contact
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="alertBox"></div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <input type="text" id="searchContacts" class="form-control search-box" placeholder="Search contacts...">
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th style="width: 20%;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="contactsTableBody">
+<!--
+                  <tr>
+                    <td>Alice Smith</td>
+                    <td>alice@ucf.edu</td>
+                    <td class="text-center">
+                      <button class="btn btn-sm btn-primary editContactBtn" 
+                        data-id="1" data-firstname="Alice" data-lastname="Smith" data-email="alice@ucf.edu">
+                        Edit
+                      </button>
+                      <button class="btn btn-sm btn-danger deleteContactBtn" data-id="1">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>John Doe</td>
+                    <td>john@ucf.edu</td>
+                    <td class="text-center">
+                      <button class="btn btn-sm btn-primary editContactBtn" 
+                        data-id="2" data-firstname="John" data-lastname="Doe" data-email="john@ucf.edu">
+                        Edit
+                      </button>
+                      <button class="btn btn-sm btn-danger deleteContactBtn" data-id="2">Delete</button>
+                    </td>
+                  </tr>
+-->
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal (for Create/Edit Contact) -->
+  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form id="contactForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="contactModalLabel">Add Contact</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Hidden field for storing the contact id when editing -->
+            <input type="hidden" id="contactID" name="contactID" value="">
+            <div class="form-group">
+              <label for="contactFirstName">First Name</label>
+              <input type="text" class="form-control" id="contactFirstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="contactLastName">Last Name</label>
+              <input type="text" class="form-control" id="contactLastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email</label>
+              <input type="email" class="form-control" id="contactEmail" name="email" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save Contact</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Mode Toggle Button -->
+  <button id="darkModeToggle" class="dark-mode-btn">🌛</button>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="main.js"></script>
+
+</body>
+</html>
