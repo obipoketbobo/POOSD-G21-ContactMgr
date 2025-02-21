@@ -1,0 +1,209 @@
+/* General styles */
+body {
+  background: linear-gradient(135deg, #f0f2f5, #f0f2f5);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dark mode background override */
+body.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, #4e54c8, #8f94fb);
+}
+.navbar-brand {
+  font-weight: bold;
+}
+
+/* Card styling */
+.card {
+  margin-top: 30px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Rounded Buttons (ONLY for Search/Refresh & Add Contact) */
+.btn-success,
+.search-btn {
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+/* Square Buttons (For Edit & Delete) */
+.btn-primary,
+.btn-danger {
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Search Box */
+.search-box {
+  width: 100%;
+  height: 40px;
+  padding: 10px 15px;
+  border-radius: 50px;
+  border: 1px solid #ced4da;
+  transition: 0.2s ease-in-out;
+}
+
+/* Dark Mode - Search Box */
+.dark-mode .search-box {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+.dark-mode .search-box::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Search/Refresh Button */
+.search-btn {
+  height: 40px;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  transition: background 0.3s, transform 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dark Mode - Search/Refresh Button */
+.dark-mode .search-btn {
+  background-color: #2c2c2c;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+/* Hover Effects */
+.search-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Table Styling */
+.table-bordered,
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #ced4da;
+}
+
+/* Dark Mode - Table Styling */
+.dark-mode .table,
+.dark-mode .table td,
+.dark-mode .table th {
+  color: #fff !important;
+}
+
+.dark-mode .table-bordered,
+.dark-mode .table-bordered th,
+.dark-mode .table-bordered td {
+  border: 1px solid #444 !important;
+}
+
+/* Dark Mode - Table Header */
+.dark-mode .table thead th {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border-color: #444 !important;
+}
+
+/* Dark Mode - Table Striping */
+.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #1e1e1e !important;
+}
+.dark-mode .table-striped tbody tr:nth-of-type(even) {
+  background-color: #242424 !important;
+}
+
+/* Dark Mode - Buttons */
+.dark-mode .btn-primary {
+  background-color: #1e88e5;
+  border-color: #1e88e5;
+}
+.dark-mode .btn-success {
+  background-color: #43a047;
+  border-color: #43a047;
+}
+.dark-mode .btn-danger {
+  background-color: #d32f2f;
+  border-color: #d32f2f;
+}
+
+/* Dark Mode - Card */
+.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+/* Dark Mode - Navbar */
+.dark-mode .navbar {
+  background: linear-gradient(90deg, #2c3e50, #4e54c8);
+}
+
+/* Floating Dark Mode Toggle Button */
+.dark-mode-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  border: none;
+  border-radius: 10px;
+  background: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.dark-mode-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Dark Mode - Dark Mode Button */
+.dark-mode .dark-mode-btn {
+  background: #2e2e2e !important;
+  color: #fff !important;
+  box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.4), 0px 4px 10px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Dark Mode - Modal */
+.dark-mode .modal-content {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+  border: 1px solid #444;
+}
+
+/* Dark Mode - Form Inputs */
+.dark-mode .modal-content .form-control {
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+
+/* Dark Mode - Placeholder Text */
+.dark-mode .modal-content .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Dark Mode - Modal Close Button */
+.dark-mode .modal-header .close {
+  color: #ffffff !important;
+}
+
+/* Dark Mode - Button Adjustments */
+.dark-mode .modal-footer .btn {
+  border-color: #555 !important;
+}
+
+/* Dark Mode - Form Line Accent Color */
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+  border-color: #444 !important;
+}
